@@ -1,0 +1,39 @@
+
+<%= form_for @article do |f| %>
+ 
+ 
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@article.errors.count, "error") %> 
+      </h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+   <%= f.number_field :user_id, id: 'article.user_id', class:"form-control", placeholder:"User Id", value: current_user.id, type: :hidden%><br/>
+  <%= f.number_field :organization_id, id: 'article.organization_id', class:"form-control", placeholder:"Organization Id", value: @organization_id, type: :hidden %><br/>
+
+<div>
+  <%= f.label :status %><br>
+  <%= f.select :status, Visible::VALID_STATUSES, selected: @article.status || 'public' %>
+</div><br>
+
+  <div>
+    <%= f.submit %><br>
+  </div>
+ 
+<% end %>

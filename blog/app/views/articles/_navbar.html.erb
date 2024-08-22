@@ -1,0 +1,27 @@
+<%= stylesheet_link_tag 'navbar.css' %>
+
+
+<nav class="navbar">
+  <div class="container">
+
+  <div class="navbar-logo">
+    <h1>Fleetpanda</h1>
+  </div>
+    <div class="navbar-header">
+      <%= link_to 'Home', root_path, class: "navbar-brand" %>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <% if user_signed_in? %>
+        <li><%= link_to 'Articles', articles_path %></li>
+        <li><%= link_to 'New Article', new_article_path %></li>
+
+
+        <li><%= link_to 'Logout', destroy_user_session_path, data: {turbo_method: :delete} %></li>
+      <% else %>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
